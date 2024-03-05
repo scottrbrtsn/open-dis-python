@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  producer:
+    depends_on: 
+      - consumer 
+    build: .
+    entrypoint: ["/bin/sh","-c", "python -u /code/dis_sender.py"]
+    environment:
+      DIS_DESTINATION: "255.255.255.255"
+  consumer:
+    build: .
+    entrypoint: ["/bin/sh","-c", "python -u /code/dis_receiver.py"]
+    environment:
+      DIS_DESTINATION: "255.255.255.255"
